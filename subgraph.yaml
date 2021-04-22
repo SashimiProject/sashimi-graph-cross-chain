@@ -1,0 +1,28 @@
+specVersion: 0.0.2
+description: Sashimi Cross Chain Subgraph
+repository: https://github.com/SashimiProject/sashimi-graph-cross-chain
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Sashimi
+    network: heco
+    source:
+      address: '0x097d70646e1AfE02CC8d3A96C32D3686bE0f1f75'
+      abi: CrossChain
+      startBlock: 4002768
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - CrossChainTransferEvent
+      abis:
+        - name: CrossChain
+          file: ./abis/CrossChain.json
+        - name: CrossChainDelegator
+          file: ./abis/CrossChainDelegator.json
+      eventHandlers:
+        - event: CrossChainTransfer(indexed address,uint256,indexed address,address,uint8,uint256)
+          handler: handleCrossChainTransfer
+      file: ./src/mapping.ts

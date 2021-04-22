@@ -1,0 +1,37 @@
+{
+  "name": "sashimi-cross-chain",
+  "version": "0.1.0",
+  "scripts": {
+    "build-contract": "solc contracts/Gravity.sol --abi -o abis --overwrite && solc contracts/Gravity.sol --bin -o bin --overwrite",
+    "create": "graph create sashimiproject/sashimi-cross-chain --node https://api.thegraph.com/deploy/",
+    "create-local": "graph create sashimiproject/sashimi-cross-chain --node http://127.0.0.1:8020",
+    "create-heco": "graph create sashimiproject/sashimi-cross-chain-heco --node http://127.0.0.1:8020",
+    "codegen": "graph codegen",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:kovan": "mustache config/kovan.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:bsc": "mustache config/bsc.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:heco": "mustache config/heco.json subgraph.template.yaml > subgraph.yaml",
+    "build": "graph build",
+    "deploy-mainnet": "graph deploy sashimiproject/sashimi-cross-chain --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-kovan": "graph deploy sashimiproject/sashimi-cross-chain-kovan --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-bsc": "graph deploy sashimiproject/sashimi-cross-chain-bsc --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "deploy-local": "graph deploy sashimiproject/sashimi-cross-chain- --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
+    "deploy-heco": "graph deploy sashimiproject/sashimi-cross-chain-heco --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020",
+    "deploy:mainnet": "yarn prepare:mainnet && yarn deploy-mainnet",
+    "deploy:kovan": "yarn prepare:kovan && yarn deploy-kovan",
+    "deploy:bsc": "yarn prepare:bsc && yarn deploy-bsc",
+    "deploy:heco": "yarn prepare:heco && yarn deploy-heco"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.20.0",
+    "@graphprotocol/graph-ts": "^0.20.0",
+    "mustache": "^3.1.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "truffle": "^5.0.4",
+    "truffle-contract": "^4.0.5",
+    "truffle-hdwallet-provider": "^1.0.4"
+  }
+}
